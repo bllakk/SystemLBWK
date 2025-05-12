@@ -1,5 +1,8 @@
 package com.LBWK.SystemLBWK.model;
 
+import com.LBWK.SystemLBWK.util.ValidateUtil;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Employee {
@@ -20,9 +23,14 @@ public class Employee {
 
     public Employee(int id, String name, String position, List<Modification> assignments) {
         this.id = id;
-        this.name = name;
-        this.position = position;
-        this.assignments = assignments;
+        this.name = ValidateUtil.validateNotBlank(name, "Name");
+        this.position = ValidateUtil.validateNotBlank(position, "position");
+        this.assignments = (assignments == null) ? new ArrayList<>() : assignments;
+    }
+
+    @Override
+    public String toString(){
+        return "ID: " + id +", Name: " + name + ", Position: " + position;
     }
     public int getId() {
         return id;

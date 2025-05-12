@@ -1,5 +1,9 @@
 package com.LBWK.SystemLBWK.model;
 
+import com.LBWK.SystemLBWK.exception.DuplicateModificationException;
+import com.LBWK.SystemLBWK.util.ValidateUtil;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Car {
@@ -10,16 +14,16 @@ public class Car {
     private List<Modification> modifications;
 
     public Car(String brand, String model, int year, Client owner, List<Modification> modifications) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
+        this.brand = ValidateUtil.validateNotBlank(brand, "Brand");
+        this.model = ValidateUtil.validateNotBlank(model, "Model");
+        this.year = ValidateUtil.validateYear(year);
         this.owner = owner;
-        this.modifications = modifications;
+        this.modifications = (modifications == null) ? new ArrayList<>() : modifications;
     }
 
     public void addModification(Modification m){
         if (modifications.contains(m)){
-            //Exception
+            throw new DuplicateModificationException(m.getName());
         }
         modifications.add(m);
     }
@@ -42,6 +46,11 @@ public class Car {
         }
     }
 
+    @Override
+    public String toString(){
+        return "Brand: " + brand + ", Model: " + model + ", Year: " + year + ", Owner: " + getOwner().getName();
+    }
+
     public String getBrand() {
         return brand;
     }
@@ -62,24 +71,4 @@ public class Car {
         return modifications;
     }
 
-    public static class ModMotor extends Modification{
-        private int horsePower;
-        private String fuelType;
-
-        public ModMotor(String name, double cost, Employee responsible, int horsePower, String fuelType) {
-            super(name, cost, responsible);
-            this.horsePower = horsePower;
-            this.fuelType = fuelType;
-        }
-
-
-        @Override
-        void executeModification() {
-            System.out.println("Installing motor modification: " + this.getName());
-            System.out.println("Horse Power: " + this.horsePower);
-            System.out.println("Fuel Type: " + this.fuelType);
-            System.out.println("Cost: $" + this.getCost());
-            System.out.println("Responsible com.LBWK.SystemLBWK.model.Employee: " + this.getResponsible().getName());
-        }
-    }
 }

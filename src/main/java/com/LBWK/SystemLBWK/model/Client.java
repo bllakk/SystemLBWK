@@ -1,5 +1,7 @@
 package com.LBWK.SystemLBWK.model;
 
+import com.LBWK.SystemLBWK.util.ValidateUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +12,9 @@ public class Client {
     private List<Car> cars;
 
     public Client(String name, long cpf, String nationality, List<Car> cars) {
-        this.name = name;
-        this.cpf = cpf;
-        this.nationality = nationality;
+        this.name = ValidateUtil.validateNotBlank(name, "Name");
+        this.cpf = ValidateUtil.validateCPF(cpf);
+        this.nationality = ValidateUtil.validateNotBlank(nationality, "nationality");
         this.cars = (cars == null) ? new ArrayList<>() : cars;
     }
 

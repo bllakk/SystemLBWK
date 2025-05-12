@@ -42,7 +42,7 @@ public class Main {
                 case 1 -> clientService.clientMenu(scanner, listClient);
                 case 2 -> carService.carMenu(scanner, listCars, listClient);
                 case 3 -> employeeService.employeeMenu(scanner, listEmployee);
-                case 4 -> projectJDMService.ProjectJdmMenu(scanner, listProject, listClient, listEmployee);
+                case 4 -> projectJDMService.ProjectJDMMenu(scanner, listProject, listClient, listEmployee);
             }
         }
 

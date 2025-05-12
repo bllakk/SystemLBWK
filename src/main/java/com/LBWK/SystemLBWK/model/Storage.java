@@ -1,5 +1,7 @@
 package com.LBWK.SystemLBWK.model;
 
+import com.LBWK.SystemLBWK.exception.PartUnavailableException;
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -13,7 +15,7 @@ public class Storage {
     public void usePart(String partName, int quantity){
         int available = partsAvailable.getOrDefault(partName, 0);
         if (available < quantity){
-            //Storafe
+            throw new PartUnavailableException(partName);
         }
         partsAvailable.put(partName, available - quantity);
     }

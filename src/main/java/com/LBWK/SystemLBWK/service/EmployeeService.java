@@ -1,6 +1,7 @@
 package com.LBWK.SystemLBWK.service;
 
 import com.LBWK.SystemLBWK.model.Employee;
+import com.LBWK.SystemLBWK.util.ValidateUtil;
 
 import java.util.List;
 import java.util.Scanner;
@@ -37,9 +38,11 @@ public class EmployeeService {
 
         System.out.print("Enter employee name: ");
         String name = scanner.nextLine();
+        name = ValidateUtil.ValidateInputString(name, "name");
 
         System.out.print("Enter employee position: ");
         String position = scanner.nextLine();
+        position = ValidateUtil.ValidateInputString(position, "position");
 
         Employee employee = new Employee(id, name, position, null);
         listEmployee.add(employee);

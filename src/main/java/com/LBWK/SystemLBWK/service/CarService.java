@@ -3,6 +3,7 @@ package com.LBWK.SystemLBWK.service;
 import com.LBWK.SystemLBWK.model.Car;
 import com.LBWK.SystemLBWK.model.Client;
 import com.LBWK.SystemLBWK.util.FinderUtil;
+import com.LBWK.SystemLBWK.util.ValidateUtil;
 
 import java.util.List;
 import java.util.Scanner;
@@ -34,12 +35,15 @@ public class CarService {
         System.out.println("--------------------");
         System.out.print("Enter car brand: ");
         String brand = scanner.nextLine();
+        brand = ValidateUtil.ValidateInputString(brand, "brand");
 
         System.out.print("Enter car model: ");
         String model = scanner.nextLine();
+        model = ValidateUtil.ValidateInputString(model, "model");
 
         System.out.print("Enter car year: ");
         int year = Integer.parseInt(scanner.nextLine());
+        year = ValidateUtil.ValidateInputYear(year);
 
         Client foundClient = FinderUtil.findClientByCpf(scanner, listClient);
 
@@ -56,8 +60,8 @@ public class CarService {
         Client foundClient = FinderUtil.findClientByCpf(scanner, listClient);
         List<Car> foundClientCar = foundClient.getCars();
         for (Car c : foundClientCar){
-            System.out.println("Name: " + c.getBrand());
-            System.out.println("ID: " + c.getModel());
+            System.out.println("Brand: " + c.getBrand());
+            System.out.println("Model: " + c.getModel());
             System.out.println("Year: " + c.getYear());
             System.out.println("------------------------------");
         }

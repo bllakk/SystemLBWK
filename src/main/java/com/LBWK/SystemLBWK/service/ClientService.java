@@ -1,6 +1,8 @@
 package com.LBWK.SystemLBWK.service;
 
 import com.LBWK.SystemLBWK.model.Client;
+import com.LBWK.SystemLBWK.util.ValidateUtil;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,12 +34,16 @@ public class ClientService {
         System.out.println("--------------------");
         System.out.print("Enter customer name: ");
         String name = scanner.nextLine();
+        name = ValidateUtil.ValidateInputString(name, "Name");
 
         System.out.print("Enter customer CPF (only numbers): ");
         long cpf = Long.parseLong(scanner.nextLine());
+        cpf = ValidateUtil.ValidateInputCPF(cpf);
+
 
         System.out.print("Enter customer nationality: ");
         String nationality = scanner.nextLine();
+        nationality = ValidateUtil.ValidateInputString(nationality, "nationality");
 
         Client client = new Client(name, cpf, nationality, null);
         listClient.add(client);
